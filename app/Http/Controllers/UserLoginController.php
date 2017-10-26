@@ -18,5 +18,7 @@ class UserLoginController extends Controller
     	return view('posts.index');
     }
 
-
+    public function create(){
+    	
+    }
 }

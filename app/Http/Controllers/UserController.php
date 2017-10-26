@@ -47,7 +47,7 @@ class UserController extends Controller
         $user->usertype = $request->usertype;
 
         $user->save();
-        return $request->all();
+        // return $request->all();
     }
 
 /*    public function search(request $request){
