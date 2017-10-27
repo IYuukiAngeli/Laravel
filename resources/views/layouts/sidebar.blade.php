@@ -7,12 +7,14 @@
         <ul class="nav nav-sidebar">
           <label class="nav-header"> TRANSACTION</label>
             <li><a href="#">HEI Evaluation</a></li>
-            <li><a href="#">Evaluation Tool</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <label class="nav-link"> MAINTENANCE</label>
-            <li><a href="">School</a></li>
+            <li><a href="{{ route('school') }}">School</a></li>
             <li><a href="{{ route('user') }}">User</a></li>
+            <li><a href="{{ route('usertype') }}">Usertype</a></li>
+            <li><a href="{{ route('program') }}">Program</a></li>
+            <li><a href="{{ route('tool') }}">Evaluation Tool</a></li>
           </ul>
 
   </div>
