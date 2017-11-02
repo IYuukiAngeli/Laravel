@@ -1,13 +1,12 @@
 <script>
 
-	$.ajaxSetup({
+	
+	$(document).ready(function(){
+/*		$.ajaxSetup({
 		  headers: {
 		    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		  }
-		});
-	$(document).ready(function(){
-		
-
+		});*/
 		$(document).on('click','.btnEdit',function () {
 			var id = $(this).find('#userId').val();
 						
