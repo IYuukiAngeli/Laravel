@@ -20,6 +20,7 @@ Route::get('tool', 'ToolController@index');
 
 Route::post('user', 'UserController@create')->name('user');
 Route::post('usertype', 'UsertypeController@create')->name('usertype');
+
 Route::post('program', 'ProgramController@create')->name('program');
 Route::post('school', 'SchoolController@create')->name('school');
 Route::post('tool', 'ToolController@create')->name('tool');

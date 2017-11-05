@@ -1,38 +1,24 @@
-<script>
-
+<script type="text/javascript">
 	$(document).ready(function(){
-/*		$.ajaxSetup({
-		  headers: {
-		    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		  }
-		});*/
 		$(document).on('click','.btnEdit',function () {
-			var id = $(this).find('#usertypeId').val();
-						
-			$('#title').text('Edit usertype');
-			$('#deleteusertype').show('400');
-			$('#saveusertype').show('400');
-			$('#addusertype').hide();
-			$('#idusertype').val(id);
-	
-			console.log(id);
+			var id = $("#usertypeId").val();
+			$.post('usertype/show', {'id': id, '_token':$('input[name=_token]').val()}, function(data){
+				console.log(data);
+
+				$('#usertypes').load(location.href + ' #usertypes');
+			});
+
 		});
 
 
-		$(document).on('click','#addNewusertype', function(event){
-			$('#title').text('Add New usertype');
-			$('#deleteusertype').hide();
-			$('#saveusertype').hide();
-			$('#addusertype').show('400');
-		});
-
-		$('#addusertype').click(function(event){
+		$('#addUsertype').click(function(event){
 			var usertype_code = $('#txtusertypecode').val();
 			var usertype_desc = $('#txtusertypedesc').val();
-			if(usertype_code==""){
+			var created_by = $('#userName').val();
+			if(usertype_code == "" || usertype_desc == ""){
 				alert('Invalid input');
 			}else{
-				$.post('usertype', {'usertype_code': usertype_code,  'usertype_desc': usertype_desc, '_token':$('input[name=_token]').val()}, function(data) {
+				$.post('usertype', {'usertype_code': usertype_code,  'usertype_desc': usertype_desc, 'created_by': created_by, '_token':$('input[name=_token]').val()}, function(data) {
 					console.log(usertype_code + usertype_desc);
 					$('#usertypes').load(location.href + ' #usertypes');
 				});
@@ -40,7 +26,7 @@
 			}
 		});	
 
-		$('#deleteusertype').click(function(event){
+		$('#deleteUsertype').click(function(event){
 			var idU = $("#idusertype").val();
 			$.post('usertype/delete',{'id': idU, '_token':$('input[name=_token]').val()}, function(data){
 				console.log(data);
@@ -49,7 +35,7 @@
 
 		});
 
-		$('#saveusertype').click(function(event){
+		$('#saveUsertype').click(function(event){
 			var idU = $("#idusertype").val();
 			var usertype_code = $("#txtusertypecode").val();
 			var usertype_desc = $("#txtusertypedesc").val();

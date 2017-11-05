@@ -9,8 +9,6 @@
 		});*/
 		$(document).on('click','.btnEdit',function () {
 			var id = $(this).find('#userId').val();
-						
-			$('#title').text('Edit User');
 			$('#deleteUser').show('400');
 			$('#saveUser').show('400');
 			$('#addUser').hide();
