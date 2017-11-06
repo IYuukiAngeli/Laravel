@@ -37,6 +37,12 @@ class UserController extends Controller
         User::where('id', $request->id)->delete();
         return $request->all();
     }
+
+    public function show(request $request){
+        
+        
+        return User::where('id', $request->id)->first();;
+    }
     
     public function update(request $request){
         

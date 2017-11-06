@@ -57,7 +57,7 @@
                                 <a class="btnShow " data-toggle="modal" data-target="#userModal" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
                                 <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
-                                <a class="btnEdit" data-toggle="modal" data-target="#userModal" href="#"><i class="fa fa-pencil" aria-hidden="true">
+                                <a class="btnEdit" data-toggle="modal" data-target="#userEditModal" href="#"><i class="fa fa-pencil" aria-hidden="true">
                                     <input type="hidden" id="userId" value="{{$value->id}}">
                                 </i></a>
                             </td>
@@ -125,14 +125,72 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="deleteUser" data-dismiss="modal" style="display: none">Delete</button>
-                    <button type="button" class="btn btn-success" id="saveUser" data-dismiss="modal"style="display: none" >Save changes</button>
                     <button type="button" class="btn btn-primary" id="addUser" data-dismiss="modal">Add User</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+    <div class="modal fade" id="userEditModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="title">Edit User</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="idUser">
+                    <div class="container">
+                        <div class="row">
+                            <div class="row form-group">
+                                <div class="col-sm-1">
+                                    <h5 > Username: </h5>
+                                </div>
+                                <div class="col-sm-5">
+                                    <input type="text" id = "txtusername" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-1">
+                                    <h5 > Fullname: </h5>
+                                </div>
+                                <div class="col-sm-5">
+                                    <input type="text" id ="txtfullname" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-1">
+                                    <h5 > Password: </h5>
+                                </div>
+                                <div class="col-sm-5">
+                                    <input type="password" id ="txtpassword" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-1">
+                                    <h5 > Usertype: </h5>
+                                </div>
+                                <div class="col-sm-5"> <select name = "cmbusertype"> 
+                                  
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+
+                    
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="deleteUser" data-dismiss="modal" >Delete</button>
+                    <button type="button" class="btn btn-success" id="saveUser" data-dismiss="modal">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 @endsection
 
