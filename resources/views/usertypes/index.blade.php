@@ -4,14 +4,15 @@
 
 {{ csrf_field() }}
 
+
     <div class='panel panel-default'>
         <div class='panel panel-heading'>
             <div class="panel-title">
                   Usertype Information Page <a href="#" id="addNewusertype" class="pull-right" data-toggle="modal" data-target="#usertypeModal"> <i class="fa fa-plus" aria-hidden="true" > </i> </a>
             </div>
-          
+          <input type="hidden" id="userName" value=" {{ Auth::user()->fullname}} ">
         </div>
-        <div class="panel panel-body" id="usertype">
+        <div class="panel panel-body" id="usertypes">
             
                 <!-- will be used to show any messages -->
                 @if (Session::has('message'))
@@ -35,20 +36,18 @@
                         <tr>
 
                             <td>{{ $value->id }}</td>
-                            <td>{{ $value->usertype_code }}</td>
-                            <td>{{ $value->usertype_desc }}</td>
+                            <td id = "usertype-code-{{ $value->id }}">{{ $value->usertype_code }}</td>
+                            <td id = "usertype-desc-{{ $value->id }}">{{ $value->usertype_desc }}</td>
                             <td>{{ $value->created_by }}</td>
                             <td>{{ $value->created_date }}</td>
-                            <td>{{ $value->updated_by }}</td>
-                            <td>{{ $value->updated_date}}</td>
-
-                            <!-- we will also add show, edit, and delete buttons -->
+                            <td>{{ $value->edited_by }}</td>
+                            <td>{{ $value->edited_date}}</td>
                             <td>
-
-                                <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
-                                <a class="btnEdit" data-toggle="modal" data-target="#usertypeEditModal" href="#"><i class="fa fa-pencil" aria-hidden="true">
-                                    <input type="hidden" id="usertypeId" value="{{$value->id}}">
-                                </i></a>
+                                <a class="btnEdit" data-toggle="modal" data-target="#usertypeEditModal" href="#"
+                                data-id = "{{ $value->id }}">
+                                <i class="fa fa-pencil" aria-hidden="true">
+                                </i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -68,8 +67,7 @@
                     <h4 class="modal-title" id="title">Add New Usertype</h4>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="idusertype">
-                    <input type="hidden" id="userName" value=" {{ Auth::user()->fullname}} ">
+                    
                     <div class="container">
                         <div class="row">
                             <div class="row form-group">
@@ -111,7 +109,7 @@
                     <h4 class="modal-title" id="title">Edit Usertype</h4>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="idusertype">
+
                     <div class="container">
                         <div class="row">
                             <div class="row form-group">
@@ -119,7 +117,7 @@
                                     <h5 > Usertype Code: </h5>
                                 </div>
                                 <div class="col-sm-5">
-                                    <input type="text" id = "txtusertypecode" class="form-control" value=" {{ $value->usertype_code }}"/>
+                                    <input type="text" id = "txteditusertypecode" class="form-control" value="{{ $value->usertype_code }}"/>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -127,7 +125,7 @@
                                     <h5 > Usertype Desc: </h5>
                                 </div>
                                 <div class="col-sm-5">
-                                    <input type="text" id ="txtusertypedesc" class="form-control" {{ $value->usetype_desc }}/>
+                                    <input type="text" id ="txteditusertypedesc" class="form-control" value= "{{ $value->usertype_desc }}"/>
                                 </div>
                           
                         </div>
@@ -137,9 +135,9 @@
                 </div>
 
                 <div class="modal-footer">
+                    
                     <button type="button" class="btn btn-danger" id="deleteUsertype" data-dismiss="modal" >Delete</button>
                     <button type="button" class="btn btn-success" id="saveUsertype" data-dismiss="modal" >Save changes</button>
-
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

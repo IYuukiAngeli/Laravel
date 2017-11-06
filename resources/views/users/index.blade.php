@@ -40,11 +40,11 @@
                             <td>{{ $value->username }}</td>
                             <td>{{ $value->fullname }}</td>
                             <td>{{ $value->retries }}</td>
-                            <td>{{ $value->usertype }}</td>
+                            <td>{{ $value->usertype_code }}</td>
                             <td>{{ $value->created_by }}</td>
                             <td>{{ $value->created_date }}</td>
-                            <td>{{ $value->updated_by }}</td>
-                            <td>{{ $value->updated_date}}</td>
+                            <td>{{ $value->edited_by }}</td>
+                            <td>{{ $value->edited_date}}</td>
 
                             <!-- we will also add show, edit, and delete buttons -->
                             <td>
@@ -110,8 +110,11 @@
                                 <div class="col-sm-1">
                                     <h5 > Usertype: </h5>
                                 </div>
-                                <div class="col-sm-5"> <select name = "cmbusertype"> 
-                                  
+                                <div class="col-sm-5"> 
+                                <select name = "cmbusertype"> 
+                                    @foreach($usertypes as $usertype)
+                                        <option value="{{ $usertype->id }}">{{ $usertype->usertype_code}}</option>
+                                    @endforeach
                                 </select>
                                 </div>
                             </div>

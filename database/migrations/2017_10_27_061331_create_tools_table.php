@@ -17,7 +17,7 @@ class CreateToolsTable extends Migration
             $table->tinyIncrements('id');
             $table->string('tool_code', 80)->unique();
             $table->string('tool_desc', 180);
-            $table->binary('tool_file');
+            $table->text('tool_file');
             $table->string('created_by', 80)->nullable();
             $table->dateTime('created_date')->nullable();
             $table->string('edited_by', 80)->nullable();

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class UsertypeController extends Controller
 {
+ 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //
 
     public function index(){
@@ -14,13 +19,13 @@ class UsertypeController extends Controller
     	//get all users
     	$usertypes = Usertype::all();
 
+
     	//load the view and pass the users
 
     	return view('usertypes.index')->with('usertypes', $usertypes);
     }
 
     public function create(request $request){
-        //load create form
 
         $usertype = new Usertype;
         $usertype->usertype_code = $request->usertype_code;
@@ -30,17 +35,18 @@ class UsertypeController extends Controller
         $usertype->save();
         return 'Done';
     } 
-
-    public function show(request $request){
-        Usertype::where('id', $request->id)->first();
+    
+    public function delete(request $request){
+        
+        Usertype::where('id', $request->id)->delete();
         return $request->all();
     }
-
+    
     public function update(request $request){
-        
         $usertype = Usertype::find($request->id);
         $usertype->usertype_code = $request->usertype_code;
         $usertype->usertype_desc = $request->usertype_desc;
+        $usertype->edited_by = $request->edited_by;
 
         $usertype->save();
         return $request->all();

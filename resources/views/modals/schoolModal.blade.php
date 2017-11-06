@@ -1,61 +1,41 @@
-<script>
+<script type="text/javascript">
 
 	$(document).ready(function(){
-/*		$.ajaxSetup({
-		  headers: {
-		    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		  }
-		});*/
+		var id = '';
+
 		$(document).on('click','.btnEdit',function () {
-			var id = $(this).find('#schoolId').val();
-						
-			$('#title').text('Edit school');
-			$('#deleteschool').show('400');
-			$('#saveschool').show('400');
-			$('#addschool').hide();
-			$('#idschool').val(id);
-	
-			console.log(id);
+			id = $(this).attr('data-id');
+			$("#txteditschoolcode").val($('#school-code-'+id).text());
+			$("#txteditschooldesc").val($('#school-desc-'+id).text());
 		});
 
-
-		$(document).on('click','#addNewschool', function(event){
-			$('#title').text('Add New school');
-			$('#deleteschool').hide();
-			$('#saveschool').hide();
-			$('#addschool').show('400');
-		});
-
-		$('#addschool').click(function(event){
+		
+		$('#addSchool').click(function(event){
 			var school_code = $('#txtschoolcode').val();
 			var school_desc = $('#txtschooldesc').val();
+			var created_by = $('#userName').val();
+			
 			if(school_code==""){
 				alert('Invalid input');
 			}else{
-				$.post('school', {'school_code': school_code,  'school_desc': school_desc, '_token':$('input[name=_token]').val()}, function(data) {
-					console.log(school_code + school_desc );
+				$.post('school', {'school_code': school_code, 'school_desc': school_desc, 'created_by': created_by, '_token':$('input[name=_token]').val()}, function(data) {
 					$('#schools').load(location.href + ' #schools');
 				});
 
 			}
 		});	
 
-		$('#deleteprogram').click(function(event){
-			var idU = $("#idschool").val();
-			$.post('school/delete',{'id': idU, '_token':$('input[name=_token]').val()}, function(data){
-				console.log(data);
+		$('#deleteSchool').click(function(event){
+			$.post('school/delete',{'id': id, '_token':$('input[name=_token]').val()}, function(data){
 				$('#schools').load(location.href + ' #schools');
 			});
-
 		});
 
-		$('#saveschool').click(function(event){
-			var idU = $("#idschool").val();
-			var school_code = $("#txtschoolcode").val();
-			var school_desc = $("#txtschooldesc").val();
-
-			$.post('school/update',{'id': idU, 'school_code': school_code,  'school_desc': school_desc, '_token':$('input[name=_token]').val()}, function(data){
-				console.log(data);
+		$('#saveSchool').click(function(event){
+			var school_code = $("#txteditschoolcode").val();
+			var school_desc = $("#txteditschooldesc").val();
+			var edited_by = $('#userName').val();
+			$.post('school/update',{'id': id, 'school_code': school_code,  'school_desc': school_desc,'edited_by': edited_by, '_token':$('input[name=_token]').val()}, function(data){
 				$('#schools').load(location.href + ' #schools');
 			});
 

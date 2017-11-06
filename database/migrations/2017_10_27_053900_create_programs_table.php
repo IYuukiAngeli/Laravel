@@ -15,7 +15,7 @@ class CreateProgramsTable extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->tinyIncrements('id');
-            $table->string('program_code', 80)->unique();
+            $table->string('program_code', 80);
             $table->string('program_desc', 180);
             $table->string('created_by', 80)->nullable();
             $table->dateTime('created_date')->nullable();

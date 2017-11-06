@@ -1,61 +1,45 @@
-<script>
+<script type="text/javascript">
 
 	$(document).ready(function(){
-/*		$.ajaxSetup({
-		  headers: {
-		    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		  }
-		});*/
+		var id = '';
+
 		$(document).on('click','.btnEdit',function () {
-			var id = $(this).find('#programId').val();
-						
-			$('#title').text('Edit program');
-			$('#deleteprogram').show('400');
-			$('#saveprogram').show('400');
-			$('#addprogram').hide();
-			$('#idprogram').val(id);
-	
+			id = $(this).attr('data-id');
 			console.log(id);
+			
+			$("#txteditprogramcode").val($('#program-code-'+id).text());
+			$("#txteditprogramdesc").val($('#program-desc-'+id).text());
 		});
 
 
-		$(document).on('click','#addNewprogram', function(event){
-			$('#title').text('Add New program');
-			$('#deleteprogram').hide();
-			$('#saveprogram').hide();
-			$('#addprogram').show('400');
-		});
-
-		$('#addprogram').click(function(event){
+		$('#addProgram').click(function(event){
 			var program_code = $('#txtprogramcode').val();
 			var program_desc = $('#txtprogramdesc').val();
+			var created_by = $('#userName').val();
+
 			if(program_code==""){
 				alert('Invalid input');
 			}else{
-				$.post('program', {'program_code': program_code,  'program_desc': program_desc, '_token':$('input[name=_token]').val()}, function(data) {
-					console.log(program_code + program_desc );
-					$('#programs').load(location.href + ' #programs');
-				});
+				$.post('program', {'program_code': program_code,  'program_desc': program_desc, 'created_by' : created_by, '_token':$('input[name=_token]').val()}, function(data) {
+							$('#programs').load(location.href + ' #programs');
 
+				});
 			}
 		});	
 
-		$('#deleteprogram').click(function(event){
-			var idU = $("#idprogram").val();
-			$.post('program/delete',{'id': idU, '_token':$('input[name=_token]').val()}, function(data){
-				console.log(data);
+		$('#deleteProgram').click(function(event){
+			$.post('program/delete',{'id': id, '_token':$('input[name=_token]').val()}, function(data){
 				$('#programs').load(location.href + ' #programs');
 			});
 
 		});
 
-		$('#saveprogram').click(function(event){
-			var idU = $("#idprogram").val();
-			var program_code = $("#txtprogramcode").val();
-			var program_desc = $("#txtprogramdesc").val();
+		$('#saveProgram').click(function(event){
+			var program_code = $("#txteditprogramcode").val();
+			var program_desc = $("#txteditprogramdesc").val();
+			var edited_by = $('#userName').val();
 
-			$.post('program/update',{'id': idU, 'program_code': program_code,  'program_desc': program_desc, '_token':$('input[name=_token]').val()}, function(data){
-				console.log(data);
+			$.post('program/update',{'id': id, 'program_code': program_code,  'program_desc': program_desc,'edited_by': edited_by, '_token':$('input[name=_token]').val()}, function(data){
 				$('#programs').load(location.href + ' #programs');
 			});
 

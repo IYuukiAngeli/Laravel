@@ -4,19 +4,29 @@ namespace App\Http\Controllers;
 use App\User;
 
 use Illuminate\Http\Request;
+use DB;
+use App\Usertype;
 
 class UserController extends Controller
 {
     //
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(){
 
     	//get all users
     	$users = User::all();
 
     	//load the view and pass the users
-
-    	return view('users.index')->with('users', $users);
+        $users = DB::table('users')
+            ->join('usertypes', 'users.usertype', 'usertypes.id')
+            ->select('users.*', 'usertypes.usertype_code')
+            ->get();
+        $usertypes = Usertype::all();
+    	return view('users.index', compact('users', 'usertypes'));
     }
 
     public function create(request $request){
