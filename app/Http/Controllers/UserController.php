@@ -17,10 +17,7 @@ class UserController extends Controller
     
     public function index(){
 
-    	//get all users
     	$users = User::all();
-
-    	//load the view and pass the users
         $users = DB::table('users')
             ->join('usertypes', 'users.usertype', 'usertypes.id')
             ->select('users.*', 'usertypes.usertype_code')

@@ -8,6 +8,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+use App\Hei;
 
 class User extends Model implements AuthenticatableContract{
     //
@@ -22,4 +23,9 @@ class User extends Model implements AuthenticatableContract{
 	public function tbl_usertypes(){
 		return $this->hasMany('Usertypes');
 	}
+
+	public function hei()
+	   {
+	       return $this->hasMany('App\Hei');
+	   }
 }

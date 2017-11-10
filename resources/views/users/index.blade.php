@@ -46,13 +46,9 @@
                             <td>{{ $value->edited_by }}</td>
                             <td>{{ $value->edited_date}}</td>
 
-                            <!-- we will also add show, edit, and delete buttons -->
                             <td>
 
-                                <!-- delete the nerd (uses the destroy method DESTROY /nerds/{id} -->
-                                <!-- we will add this later since its a little more complicated than the other two buttons -->
 
-                                <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
                                 <a class="btn btn-small btn-success" style="display: none" href="{{ URL::to('users/' . $value->id) }}">Show this User</a>    
                                 <a class="btnShow " data-toggle="modal" data-target="#userModal" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a>
 

@@ -18,23 +18,30 @@ class ToolController extends Controller
     }
 
     public function create(request $request){
-
-        $tool = new Tool;
+  
+         $tool = new Tool;
    
-        if ($request->hasFile('tool_file')) {
-            $tool->tool_code = $request->tool_code;
-            $tool->tool_desc = $request->tool_desc;
-            $request->tool_file->storeAs('public/tool',$tool_file);
-            $tool_file = $request->tool_code.'.'.$request->tool_file->getClientOriginalExtension();
-            $tool->created_by = $request->created_by;
-            $tool->save();
+        /*return $request->toolfile->path();*/
+        /*return $request->toolfile->store('files');*/
+       /* return $request->toolfile->storeAs('files', 'gintoki.jpg');*/
+        /*return Storage::url($tool_code);*/
 
-            return 'Done';
-        }else{
-            return 'none';
-        }
+        /*
+        return Storage::putFile('files', $request->file('toolfile'));*/
+        $tool->tool_code = $request->tool_code;
+        $tool->tool_desc = $request->tool_desc;
+         
+        $tool->created_by = $request->created_by;
+        $tool->save();
+
+        return "Done";
+      
+
+    
+
         
     }
+
 
     public function delete(request $request){
         
@@ -44,12 +51,41 @@ class ToolController extends Controller
     
     public function update(request $request){
         $tool = Tool::find($request->id);
+
+
         $tool->tool_code = $request->tool_code;
         $tool->tool_desc = $request->tool_desc;
-        $tool->tool_file = $request->tool_file;
+        $tool->tool_file = $file->store('toolfile');
+         
         $tool->edited_by = $request->edited_by;
+
 
         $tool->save();
         return $request->all();
+        
+    } 
+
+    public function store(request $request){
+
+       if ($request->hasFile('toolfile')){
+         $request->file('toolfile');
+         /*return $request->toolfile->path();*/
+         /*return $request->toolfile->store('files');*/
+         return $request->toolfile->storeAs('files', 'gintoki.jpg');
+         /*return Storage::url($tool_code);*/
+
+         /*
+         return Storage::putFile('files', $request->file('toolfile'));*/
+
+       
+       }else{
+         return 'No file selected';
+       }
+
+
     }
+
+
+
+
 }

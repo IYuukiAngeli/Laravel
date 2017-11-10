@@ -30,6 +30,7 @@
   
     <script src="{{ asset('js/app.js') }}"></script>
 
+    
     @include('modals.usertypeModal')
     @include('modals.programModal')
     @include('modals.schoolModal')

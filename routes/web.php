@@ -17,6 +17,7 @@ Route::get('usertype', 'UsertypeController@index');
 Route::get('program', 'ProgramController@index');
 Route::get('school', 'SchoolController@index');
 Route::get('tool', 'ToolController@index');
+Route::get('hei', 'HeiController@index');
 
 Route::post('user', 'UserController@create')->name('user');
 Route::post('user/delete', 'UserController@delete');
@@ -39,12 +40,24 @@ Route::post('program/update', 'ProgramController@update');
 Route::get('program/search', 'ProgramController@search');
 
 Route::post('tool', 'ToolController@create')->name('tool');
+Route::post('tool/store', 'ToolController@store')->name('tool.store');
 Route::post('tool/delete', 'ToolController@delete');
 Route::post('tool/update', 'ToolController@update');
 Route::get('tool/search', 'ToolController@search');
 
+
+Route::post('hei', 'HeiController@create')->name('hei');
+Route::post('hei/delete', 'HeiController@delete');
+Route::post('hei/update', 'HeiController@update');
+Route::get('hei/search', 'HeiController@search');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/upload', 'UploadController@index');
+Route::get('/upload/show', 'UploadController@show');
+Route::post('upload/store', 'UploadController@store')->name('upload.store');
+
+
 

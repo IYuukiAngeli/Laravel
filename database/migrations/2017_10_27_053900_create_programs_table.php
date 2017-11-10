@@ -14,9 +14,12 @@ class CreateProgramsTable extends Migration
     public function up()
     {
         Schema::create('programs', function (Blueprint $table) {
-            $table->tinyIncrements('id');
-            $table->string('program_code', 80);
-            $table->string('program_desc', 180);
+            $table->mediumIncrements('id');
+            $table->string('program_code', 80)->unique();
+            $table->string('major_code', 80)->nullable();
+            $table->string('discipline_code', 80)->nullable();
+            $table->string('program_desc', 180)->nullable();
+            $table->integer('school_code')->nullable();
             $table->string('created_by', 80)->nullable();
             $table->dateTime('created_date')->nullable();
             $table->string('edited_by', 80)->nullable();

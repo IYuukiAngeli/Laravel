@@ -12,16 +12,11 @@ class UsertypeController extends Controller
     {
         $this->middleware('auth');
     }
-    //
+
 
     public function index(){
 
-    	//get all users
-    	$usertypes = Usertype::all();
-
-
-    	//load the view and pass the users
-
+       	$usertypes = Usertype::all();
     	return view('usertypes.index')->with('usertypes', $usertypes);
     }
 
@@ -33,6 +28,8 @@ class UsertypeController extends Controller
         $usertype->created_by = $request->created_by;
 
         $usertype->save();
+
+        
         return 'Done';
     } 
     

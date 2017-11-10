@@ -7,40 +7,60 @@
     <div class='panel panel-default'>
         <div class='panel panel-heading'>
             <div class="panel-title">
-                  Evaluation Tool Information Page <a href="#" id="addNewtool" class="pull-right" data-toggle="modal" data-target="#toolModal"> <i class="fa fa-plus" aria-hidden="true" > </i> </a>
+                  Evaluation Tool Information Page <a href="#" id="addNewHei" class="pull-right" data-toggle="modal" data-target="#heiModal"> <i class="fa fa-plus" aria-hidden="true" > </i> </a>
             </div>
           <input type="hidden" id="userName" value=" {{ Auth::user()->fullname}} ">
         </div>
-        <div class="panel panel-body" id="tools">
+        <div class="panel panel-body" id="heis">
                 @if (Session::has('message'))
                     <div class="alert alert-info">{{ Session::get('message') }}</div>
                 @endif
+                      <div class="panel-group" id="accordion">
 
-                <table class="table table-striped table-bordered">
+                        @foreach ($heis as $hei)
+
+
+                            <div class="panel panel-default">
+                              <div class="panel-heading">
+                                <h4 class="panel-title">
+                                  <a data-toggle="collapse" data-parent="#accordion" href="#hei-id-{{ $hei->school->id }}"> {{ $hei->school->school_desc }} </a>
+                                </h4>
+                              </div>
+
+                              <div id="hei-id-{{ $hei->school->id }}" class="panel-collapse collapse">
+                                   <div class="panel-body"> 
+                                        <ul class="list-group">
+
+                                          @foreach ($heis as $program)
+                                              <li class="list-group-item"> {{ $programs->program->program_desc }}</li>
+                                          @endforeach
+                                            
+                                        </ul>
+                                    </div>
+                              </div>
+                            </div>
+                            
+                        @endforeach
+                           
+                        </div> 
+
+      
+               {{--  <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <td>ID</td>
-                            <td>Tool Code</td>
-                            <td>Desc</td>
-                            <td>File</td>
+                            <td>School</td>
                             <td>Created By</td>
-                            <td>Created Date</td>
                             <td>Updated By</td>
-                            <td>Updated Date</td>
+
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($tools as $key => $value)
+                    @foreach($hes as $key => $value)
                         <tr>
-
-                            <td>{{ $value->id }}</td>
-                            <td id = "tool-code-{{ $value->id }}">{{ $value->tool_code }}</td>
-                            <td id = "tool-desc-{{ $value->id }}" >{{ $value->tool_desc }}</td>
-                            <td id = "tool-file-{{ $value->id }}">{{ $value->tool_file }}</td>
+                            <td id = "school-code-{{ $value->id }}">{{ $value->school_code }}</td>
+                    
                             <td>{{ $value->created_by }}</td>
-                            <td>{{ $value->created_date }}</td>
                             <td>{{ $value->updated_by }}</td>
-                            <td>{{ $value->updated_date}}</td>
                             <td>
                                 <a class="btnEdit" data-toggle="modal" data-target="#toolEditModal" href="#" data-id = "{{ $value->id }}" ><i class="fa fa-pencil" aria-hidden="true">
                                 </i></a>
@@ -49,13 +69,13 @@
                     @endforeach
                     </tbody>
                 </table>
-                        
+                         --}}
         </div>
 
 
     </div>
   
-  <form action="{{ route('tool.store') }}" method="POST" enctype="MULTIPART/FORM-DATA" id="toolForm">
+ {{--  <form action="{{ route('tool.store') }}" method="POST" enctype="MULTIPART/FORM-DATA" id="toolForm">
 
     <div class="modal fade" id="toolModal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
@@ -157,6 +177,6 @@
         </div>
     </div>
     </div>
-
+ --}}
 @endsection
 

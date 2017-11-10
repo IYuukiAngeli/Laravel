@@ -6,7 +6,7 @@
      <!--   <li class="active"><a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a></li>-->
         <ul class="nav nav-sidebar">
           <label class="nav-header"> TRANSACTION</label>
-            <li><a href="#">HEI Evaluation</a></li>
+            <li><a href="{{ route('hei') }}">HEI Evaluation</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <label class="nav-link"> MAINTENANCE</label>

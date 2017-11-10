@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateToolsTable extends Migration
+class CreateHeisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateToolsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tools', function (Blueprint $table) {
-            $table->tinyIncrements('id');
-            $table->string('tool_code', 80)->unique();
-            $table->string('tool_desc', 180);
-            $table->text('tool_file')->nullable();
+        Schema::create('heis', function (Blueprint $table) {
+            $table->increments('id');
+            $table->mediumInteger('user_id');
+            $table->integer('school_id');
+            $table->integer('program_id');
+            $table->integer('tool_id');
+            $table->integer('usertype_id');
             $table->string('created_by', 80)->nullable();
             $table->dateTime('created_date')->nullable();
             $table->string('edited_by', 80)->nullable();
             $table->dateTime('edited_date')->nullable();
-            $table->timestamps();
+            $table->timestamps();       
         });
     }
 
@@ -33,6 +35,6 @@ class CreateToolsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tools');
+        Schema::dropIfExists('heis');
     }
 }
